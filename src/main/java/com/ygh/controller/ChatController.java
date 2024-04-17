@@ -90,27 +90,6 @@ public class ChatController {
         }
 
         chatService.addSession(session, Long.toString(user.getId()));
-
-        String type = requestParameterMap.get("type").get(0);
-        String toUserId;
-        Integer pageNum;
-        Integer pageSize;
-        switch(type){
-            case "2":
-                toUserId = requestParameterMap.get("to_user_id").get(0);
-                pageNum = Integer.parseInt(requestParameterMap.get("page_num").get(0));
-                pageSize = Integer.parseInt(requestParameterMap.get("page_size").get(0));
-                chatService.searchPersonalHistory(session, Long.toString(user.getId()), toUserId, pageNum, pageSize);
-                break;
-            case "3":
-                String groupId = requestParameterMap.get("group_id").get(0);
-                pageNum = Integer.parseInt(requestParameterMap.get("page_num").get(0));
-                pageSize = Integer.parseInt(requestParameterMap.get("page_size").get(0));
-                chatService.searchGroupHistory(session, Long.toString(user.getId()), groupId, pageSize, pageNum);
-                break;
-            default:
-
-        }
     }
 
     @OnClose
@@ -132,7 +111,7 @@ public class ChatController {
                 String toUserId = requestParameterMap.get("to_user_id").get(0);
                 chatService.onOneChat(session,Long.toString(user.getId()), toUserId, message);
                 break;
-            case "4":
+            case "2":
                 String groupId = requestParameterMap.get("group_id").get(0);
                 chatService.chatInGroup(session, Long.toString(user.getId()), groupId, message);
                 break;

@@ -101,8 +101,13 @@ public class ChatServiceImpl implements ChatService{
     }
 
     @Override
-    public void searchPersonalHistory(Session session, String userId, String toUserId, Integer pageNum,
+    public Chats searchPersonalHistory(String userId, String toUserId, Integer pageNum,
             Integer pageSize) throws IOException {
+
+        if(!isIdRight(toUserId)){
+            throw new BizException("发起聊天的对象不存在");
+        }
+
         pageNum --;
         List<String> list1 = stringRedisTemplate.opsForList().range("chat:fromId:" + userId + ":toId:" + toUserId, 0, -1);
         List<String> list2 = stringRedisTemplate.opsForList().range("chat:fromId:" + toUserId + ":toId:" + userId, 0, -1);
@@ -168,9 +173,7 @@ public class ChatServiceImpl implements ChatService{
         chats.setChats(resultList);
         chats.setTotal((long) resultList.size());
 
-        String result = objectMapper.writeValueAsString(chats);
-        session.getBasicRemote().sendText(result);
-        removeSession(session);
+        return chats;
     }
 
     private boolean isIdRight(String id){
@@ -204,7 +207,7 @@ public class ChatServiceImpl implements ChatService{
         for(String people : peoples){
             Session groupPeople = concurrentHashMap.get(people);
 
-            if(groupPeople != null && groupId.equals(groupPeople.getRequestParameterMap().get("group_id").get(0))){
+            if(groupPeople != null && groupId.equals(groupPeople.getRequestParameterMap().get("group_id").get(0)) && !userId.equals(people)){
                 groupPeople.getBasicRemote().sendText(result);
             }
         }
@@ -213,7 +216,7 @@ public class ChatServiceImpl implements ChatService{
     }
 
     @Override
-    public void searchGroupHistory(Session session, String userId, String groupId, Integer pageSize, Integer pageNum) throws IOException{
+    public Chats searchGroupHistory(String userId, String groupId, Integer pageSize, Integer pageNum) throws IOException{
         pageNum --;
         Group group = groupMapper.selectById(groupId);
 
@@ -268,9 +271,6 @@ public class ChatServiceImpl implements ChatService{
         chats.setChats(resultList);
         chats.setTotal((long) resultList.size());
 
-        String result = objectMapper.writeValueAsString(chats);
-        session.getBasicRemote().sendText(result);
-
-        removeSession(session);
+        return chats;
     }
 }

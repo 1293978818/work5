@@ -3,6 +3,7 @@ package com.ygh.service;
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ygh.domain.Chats;
 
 import jakarta.websocket.Session;
 
@@ -39,15 +40,15 @@ public interface ChatService {
 
     /**
      * 查询聊天记录
-     * @param session
      * @param userId
      * @param toUserId
      * @param pageNum
      * @param pageSize
+     * @return
      * @throws JsonProcessingException
      * @throws IOException
      */
-    public void searchPersonalHistory(Session session,String userId,String toUserId,Integer pageNum,Integer pageSize) throws JsonProcessingException, IOException;
+    public Chats searchPersonalHistory(String userId,String toUserId,Integer pageNum,Integer pageSize) throws JsonProcessingException, IOException;
 
     /**
      * 发送群聊消息
@@ -61,12 +62,12 @@ public interface ChatService {
 
     /**
      * 查询群聊历史消息
-     * @param session
      * @param userId
      * @param groupId
      * @param pageSize
      * @param pageNum
+     * @return
      * @throws IOException 
      */
-    public void searchGroupHistory(Session session,String userId,String groupId,Integer pageSize,Integer pageNum) throws IOException;
+    public Chats searchGroupHistory(String userId,String groupId,Integer pageSize,Integer pageNum) throws IOException;
 }

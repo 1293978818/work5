@@ -12,6 +12,7 @@ com\ygh\service\GroupService.class
 com\ygh\controller\ExceptionAdvice.class
 com\ygh\domain\Base.class
 com\ygh\mapper\GroupMapper.class
+com\ygh\controller\ChatHistoryController.class
 com\ygh\mapper\ChatMapper.class
 com\ygh\service\impl\ChatServiceImpl.class
 com\ygh\controller\UserController.class

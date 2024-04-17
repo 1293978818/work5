@@ -4,6 +4,7 @@ d:\code\javalearning\work5\src\main\java\com\ygh\handler\MyAuthenticationFailure
 d:\code\javalearning\work5\src\main\java\com\ygh\config\WebSocketConfig.java
 d:\code\javalearning\work5\src\main\java\com\ygh\Work5Application.java
 d:\code\javalearning\work5\src\main\java\com\ygh\service\impl\FriendServiceImpl.java
+d:\code\javalearning\work5\src\main\java\com\ygh\controller\ChatHistoryController.java
 d:\code\javalearning\work5\src\main\java\com\ygh\service\FriendService.java
 d:\code\javalearning\work5\src\main\java\com\ygh\mapper\UserMapper.java
 d:\code\javalearning\work5\src\main\java\com\ygh\filter\TokenCheckFilter.java
