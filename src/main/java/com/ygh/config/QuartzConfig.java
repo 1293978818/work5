@@ -7,6 +7,7 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import com.ygh.job.MsgDatabaseJob;
 
@@ -39,5 +40,13 @@ public class QuartzConfig {
             .build();
 
         return trigger;
+    }
+
+    @Bean
+    public SchedulerFactoryBean schedulerFactoryBean(){
+        SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
+        schedulerFactoryBean.setJobDetails(jobDetail());
+        schedulerFactoryBean.setTriggers(trigger());
+        return schedulerFactoryBean;
     }
 }

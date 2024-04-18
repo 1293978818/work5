@@ -24,15 +24,15 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/work5?useSSL=false&serverTimezone=Asia/Shanghai
     username: root
-    password: 222316
+    password: 
   data:
     redis:
       host: 192.168.190.133
       port: 6379
-      password: 222316
+      password: 
       database: 0
 my:
- secret: ygh112233
+ secret: 
 logging:
   level:
     mybatis-plus: DEBUG
@@ -51,15 +51,15 @@ spring:
   datasource:
     url: jdbc:mysql://47.120.38.239:3306/work5?useSSL=false&serverTimezone=Asia/Shanghai
     username: root
-    password: 222316
+    password: 
   data:
     redis:
       host: 47.120.38.239
       port: 6379
-      password: 222316
+      password: 
       database: 0
 my:
- secret: ygh112233
+ secret: 
 logging:
   level:
     root: ERROR
