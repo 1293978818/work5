@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
@@ -17,15 +19,12 @@ import com.ygh.mapper.ChatMapper;
  * 消息存储定时任务
  * @author ygh
  */
-public class MsgDatabaseJob extends QuartzJobBean{
+public class MsgDatabaseJob extends QuartzJobBean implements ApplicationContextAware{
 
-    @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @Autowired
     private ChatMapper chatMapper;
 
-    @Autowired
     private ObjectMapper objectMapper;
 
     @Override
@@ -42,6 +41,13 @@ public class MsgDatabaseJob extends QuartzJobBean{
 
             chatMapper.insert(chat);
         });
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.stringRedisTemplate = applicationContext.getBean(StringRedisTemplate.class);
+        this.chatMapper = applicationContext.getBean(ChatMapper.class);
+        this.objectMapper = applicationContext.getBean(ObjectMapper.class);
     }
     
 }
